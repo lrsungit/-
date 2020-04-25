@@ -1,5 +1,5 @@
 2.1 插入排序
-伪代码实现：
+插入排序伪代码实现：
 a = [5,2,4,6,1,3]
 for j in range(1,len(a)):
     key = a[j]
@@ -8,7 +8,6 @@ for j in range(1,len(a)):
         a[i+1] = a[i]
         i -= 1
     a[i+1] = key
-print(a)
 
 练习：
 2.1-1：过
@@ -70,6 +69,135 @@ print(a)
 尽量减少遍历，可以用空间换时间
 
 2.3 设计算法
-2.3.1 分治法
+归并排序伪代码实现：
+a = [5,2,4,6,1,3]
+def merge(nums,start,mid,end):
+    left = nums[start:mid+1]
+    left.append(float("inf"))
+    right = nums[mid+1:end+1]
+    right.append(float("inf"))
+    l = 0
+    r = 0
+    for n in range(start,end+1):
+        if left[l] < right[r]:
+            nums[n] = left[l]
+            l += 1
+        else:
+            nums[n] = right[r]
+            r += 1
+
+def mergeSort(nums,start,end):
+    if start < end:
+        splitPoint = (start+end)//2
+        mergeSort(nums,start,splitPoint)
+        mergeSort(nums,splitPoint+1,end)
+        merge(nums,start,splitPoint,end)
+
+mergeSort(a,0,len(a)-1)
+
+练习：
+2.3-1:过
+2.3-2:
+a = [5,2,4,6,1,3]
+def merge(nums,start,mid,end):
+    left = nums[start:mid+1]
+    right = nums[mid+1:end+1]
+    l = 0
+    r = 0
+    n = 0
+    while l<len(left) and r<len(right):
+        if left[l] < right[r]:
+            nums[start+n] = left[l]
+            l += 1
+        else:
+            nums[start+n] = right[r]
+            r += 1
+        n += 1
+
+    if l<len(left):
+        nums[start+n:end+1] = left[l:]
+    elif r<len(right):
+        nums[start+n:end+1] = right[r:]
+
+def mergeSort(nums,start,end):
+    if start < end:
+        splitPoint = (start+end)//2
+        mergeSort(nums,start,splitPoint)
+        mergeSort(nums,splitPoint+1,end)
+        merge(nums,start,splitPoint,end)
+
+mergeSort(a,0,len(a)-1)
+2.3-3:不会
+2.3-4:
+a = [5,2,4,6,1,3]
+nStack = []
+def insertSort(nums,numsStack):
+    if len(nums)>1:
+        numsStack.append(nums.pop())
+        insertSort(nums,numsStack)
+        key = numsStack.pop()
+        for i in range(len(nums)):
+            if nums[i]>key:
+                nums.insert(i,key)
+                break
+        else:
+            nums.append(key)
+
+insertSort(a,nStack)
+2.3-5:
+a = [1, 2, 3, 4, 5, 6,9]
+f = 8
+def binarySearch(nums,num,start,end):
+    if len(nums[start:end])==1 and num != nums[start]:
+        return (-1)
+    mid = (start+end)//2
+    if num == nums[mid]:
+        return (mid)
+    elif num > nums[mid]:
+        return (binarySearch(nums,num,mid,end))
+    elif num < nums[mid]:
+        return (binarySearch(nums,num,start,mid))
+    
+res = binarySearch(a,f,0,len(a))
+print(res)
+2.3-6:
+a = [5,2,4,6,1,3]
+
+def binarySearch(nums,num,start,end):
+    if len(nums[start:end])==1 and num != nums[start]:
+        return (start)
+    mid = (start+end)//2
+    if num == nums[mid]:
+        return (mid)
+    elif num > nums[mid]:
+        return (binarySearch(nums,num,mid,end))
+    elif num < nums[mid]:
+        return (binarySearch(nums,num,start,mid))
+
+res = [a[0]]
+for j in range(1,len(a)):
+    key = a[j]
+    mark = binarySearch(res,key,0,j)
+    if res[mark]>key:
+        res.insert(mark,key)
+    else:
+        res.insert(mark+1,key)
+    
+print(res)
+python列表中的insert为θ（n），此方法不能将插入排序的时间复杂度降到θ（nlgn）
+2.3-7:
+a = [5,2,4,6,1,3]
+s = 11
+sumDict = {}
+for i in range(len(a)):
+    if sumDict.get(a[i]):
+        print ([sumDict[a[i]],i])
+        break
+    else:
+        sumDict[s-a[i]] = i
+else:
+    print("无")
+可能是θ(n)
+思考题：不会
 
 
