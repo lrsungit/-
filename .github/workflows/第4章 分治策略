@@ -1,0 +1,44 @@
+4.1 最大子数组问题
+股票低买高卖问题有θ（n）的解法，遍历股价时，记录一个最低价格，记录一个最大收益，遍历完成后就得到答案。
+最大子数组伪代码实现：
+a = [13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-22,15,-4,7]
+def FindMaxCrossingSubarrray(nums,low,mid,high):
+    leftSum = nums[mid]
+    leftMaxSum = nums[mid]
+    leftMaxMark = mid
+    mark = mid-1
+    while mark >= low:
+        leftSum += nums[mark]
+        if leftSum >= leftMaxSum:
+            leftMaxSum = leftSum
+            leftMaxMark = mark
+        mark -= 1
+    rightSum = 0
+    rightMaxSum = 0
+    rightMaxMark = mid
+    mark = mid+1
+    while mark <= high:
+        rightSum += nums[mark]
+        if rightSum >= rightMaxSum:
+            rightMaxSum = rightSum
+            rightMaxMark = mark
+        mark += 1
+    return (leftMaxMark, rightMaxMark, leftMaxSum + rightMaxSum)
+
+def FindMaxSubarray(nums,low,high):
+    if high == low:return (low, high, nums[low])
+    mid = (low + high)//2
+    leftLow,leftHigh,leftSum = FindMaxSubarray(nums,low,mid)
+    rightLow,rightHigh,rightSum = FindMaxSubarray(nums,mid+1,high)
+    crossLow,crossHigh,crossSum = FindMaxCrossingSubarrray(nums,low,mid,high)
+    if leftSum >= rightSum and leftSum >= crossSum:
+        return(leftLow,leftHigh,leftSum)
+    elif rightSum >= leftSum and rightSum >= crossSum:
+        return(rightLow,rightHigh,rightSum)
+    elif crossSum >= leftSum and crossSum >= leftSum:
+        return(crossLow,crossHigh,crossSum)
+    
+print(FindMaxSubarray(a,0,len(a)-1))
+    
+练习：
+4.1-1
