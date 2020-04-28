@@ -207,5 +207,106 @@ def MatrixMerge(a11,a12,a21,a22):
 
 print (SquareMatrixMultiplyRecursive(a,b))
 练习：
+4.2-1:
+直接写代码了，没有自己算
+4.2-2:
+a = [[1,3],[7,5]]
+b = [[6,8],[4,2]]
 
+def Strassen(a,b):
+    n = len(a)
+    c = [([0]*n) for i in range(n)]
+    if n == 1:
+        c[0][0] = a[0][0] * b[0][0]
+        return c
+    else:
+        a11,a12,a21,a22 = MatrixPartition(a)
+        b11,b12,b21,b22 = MatrixPartition(b)
+        s1 = MatrixSub(b12,b22)
+        s2 = MatrixAdd(a11,a12)
+        s3 = MatrixAdd(a21,a22)
+        s4 = MatrixSub(b21,b11)
+        s5 = MatrixAdd(a11,a22)
+        s6 = MatrixAdd(b11,b22)
+        s7 = MatrixSub(a12,a22)
+        s8 = MatrixAdd(b21,b22)
+        s9 = MatrixSub(a11,a21)
+        s10 = MatrixAdd(b11,b12)
+        p1 = Strassen(a11,s1)
+        p2 = Strassen(s2,b22)
+        p3 = Strassen(s3,b11)
+        p4 = Strassen(a22,s4)
+        p5 = Strassen(s5,s6)
+        p6 = Strassen(s7,s8)
+        p7 = Strassen(s9,s10)
+        c11 = MatrixAdd(MatrixSub(MatrixAdd(p5,p4),p2),p6)
+        c12 = MatrixAdd(p1,p2)
+        c21 = MatrixAdd(p3,p4)
+        c22 = MatrixSub(MatrixSub(MatrixAdd(p5,p1),p3),p7)
+        return MatrixMerge(c11,c12,c21,c22) 
+ 
+def MatrixPartition(a):
+    n = len(a)
+    p = n//2
+    a11 = [([0]*p) for i in range(p)]
+    a12 = [([0]*p) for i in range(p)]
+    a21 = [([0]*p) for i in range(p)]
+    a22 = [([0]*p) for i in range(p)]
+    for i in range(p):
+        for j in range(p):
+            a11[i][j] = a[i][j]
+            a12[i][j] = a[i][j+p]
+            a21[i][j] = a[i+p][j]
+            a22[i][j] = a[i+p][j+p]
+    return a11,a12,a21,a22
+            
+def MatrixAdd(a,b):
+    n = len(a)
+    c = [[0]*n for i in range(n)]
+    for i in range(n):
+        for j in range(n):
+            c[i][j] = a[i][j]+b[i][j]
+    return c
 
+def MatrixSub(a,b):
+    n = len(a)
+    c = [[0]*n for i in range(n)]
+    for i in range(n):
+        for j in range(n):
+            c[i][j] = a[i][j]-b[i][j]
+    return c
+
+def MatrixMerge(a11,a12,a21,a22):
+    p = len(a11)
+    n = 2*p
+    a = []
+    a.extend(a11)
+    a.extend(a21)
+    for i in range(n):
+        if i < p:
+            a[i].extend(a12[i])
+        else:
+            a[i].extend(a22[i-p])
+    return a
+
+print (Strassen(a,b))
+4.2-3:看完4.5再回来做
+4.2-4:看完4.5再回来做
+4.2-5:看完4.5再回来做
+4.2-6:不会
+4.2-7:
+a = 1
+b = 2
+c = 3
+d = 4
+
+def complexNumMultiply(a,b,c,d):
+    p1 = a*d
+    p2 = b*c
+    p3 = (a+b)*(c-d)
+    real = p3 - p2 + p1
+    imaginary = p1 + p2
+    return real,imaginary
+
+print (complexNumMultiply(a,b,c,d))
+4.3 用代入法求解递归式
