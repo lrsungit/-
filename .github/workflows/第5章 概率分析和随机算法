@@ -9,5 +9,27 @@
 正好雇用2次，说明第二个雇用的应聘者是最好的人，而第一个雇用的应聘者到这最好的人之间都是不如第一个应聘者的。
 5.2-3：
 扔一个骰子的期望值是(1+2+3+4+5+6)/6=3.5,n个骰子就是3.5n
-5.2-4:1/n
-5.2-5:n(n-1)/2
+5.2-4:每个客户拿到自己帽子的概率为1/n。n个客户中拿到到自己帽子的期望是n*1/n=1。
+5.2-5:n(n-1)/4
+5.3 随机算法
+permute-by-sorting伪代码实现：
+import random
+a = [1,2,3,4]
+n = len(a)
+p = [0]*n
+hash_key = {}
+res = []
+for i in range(n):
+    p[i] = random.randint(1,n**3)
+    hash_key[p[i]] = a[i]
+res = [hash_key[i] for i in sorted(hash_key.keys())]
+print(res)
+randomize-in-place伪代码实现：
+import random
+a = [1,2,3,4]
+n = len(a)
+for i in range(n):
+    r = random.randint(i,n-1)
+    a[i],a[r]=a[r],a[i]
+print(a)
+练习：
