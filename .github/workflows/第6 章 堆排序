@@ -15,8 +15,8 @@ i = 2
 
 def MaxHeapify(heap,i):
     heapLenth = len(heap)
-    l = i+1
-    r = i+2
+    l = 2*i+1
+    r = 2*i+2
     largest = i
     if l <= heapLenth-1 and heap[l] > heap[i]:
         largest = l
@@ -35,8 +35,8 @@ i = 2
 
 def MaxHeapify(heap,i):
     heapLenth = len(heap)
-    l = i+1
-    r = i+2
+    l = 2*i+1
+    r = 2*i+2
     largest = i
     if l <= heapLenth-1 and heap[l] > heap[i]:
         largest = l
@@ -54,8 +54,8 @@ i = 2
 
 def MinHeapify(heap,i):
     heapLenth = len(heap)
-    l = i+1
-    r = i+2
+    l = 2*i+1
+    r = 2*i+2
     smallest = i
     if l <= heapLenth-1 and heap[l] < heap[i]:
         smallest = l
@@ -76,8 +76,8 @@ i = 2
 def MaxHeapify(heap,i):
     heapLenth = len(heap)
     large = i
-    l = large+1
-    r = large+2
+    l = 2*large+1
+    r = 2*large+2
     while heap[large] < heap[l] or heap[large] < heap[r]:
         if heap[r] < heap[l]:
             heap[large],heap[l]=heap[l],heap[large]
@@ -85,11 +85,66 @@ def MaxHeapify(heap,i):
         elif heap[l] <= heap[r]:
             heap[large],heap[r]=heap[r],heap[large]
             large = r
-        l = large+1
-        r = large+2
+        l = 2*large+1
+        r = 2*large+2
         if l > heapLenth-1 or r > heapLenth-1:break
             
 MaxHeapify(heap,i)
 print (heap)
 6.2-6:不会
 6.3 建堆
+建堆伪代码实现：
+A = [5,3,17,10,84,19,6,22,9]
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    large = i
+    l = 2*large+1
+    r = 2*large+2
+    while heap[large] < heap[l] or heap[large] < heap[r]:
+        if heap[r] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+            large = l 
+        elif heap[l] <= heap[r]:
+            heap[large],heap[r]=heap[r],heap[large]
+            large = r
+        l = 2*large+1
+        r = 2*large+2
+        if l > heapLenth-1 or r > heapLenth-1:break
+
+def BuildMaxHeap(heap):
+    for i in range((len(heap)//2-1),-1,-1):
+        MaxHeapify(heap,i)
+
+BuildMaxHeap(A)
+print(A)
+练习：
+6.3-1:
+A = [5,3,17,10,84,19,6,22,9]
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    large = i
+    l = 2*large+1
+    r = 2*large+2
+    while heap[large] < heap[l] or heap[large] < heap[r]:
+        if heap[r] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+            large = l 
+        elif heap[l] <= heap[r]:
+            heap[large],heap[r]=heap[r],heap[large]
+            large = r
+        l = 2*large+1
+        r = 2*large+2
+        if l > heapLenth-1 or r > heapLenth-1:break
+
+def BuildMaxHeap(heap):
+    for i in range((len(heap)//2-1),-1,-1):
+        MaxHeapify(heap,i)
+
+BuildMaxHeap(A)
+print(A)
+6.3-2:保持由下至上得保持最大堆的性质。
+6.3-3：不会
+6.4 堆排序算法
+
