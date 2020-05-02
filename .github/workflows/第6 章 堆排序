@@ -9,3 +9,87 @@
 6.1-6： 不是
 6.1-7：不会
 6.2 维护堆的性质
+维护堆伪代码实现：
+heap = [27,17,3,16,13,10,1,5,7,12,4,8,9,0]
+i = 2
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    l = i+1
+    r = i+2
+    largest = i
+    if l <= heapLenth-1 and heap[l] > heap[i]:
+        largest = l
+    if r <= heapLenth-1 and heap[r] > heap[largest]:
+        largest = r
+    if largest != i:
+        heap[i],heap[largest]=heap[largest],heap[i]
+        MaxHeapify(heap,largest)
+
+MaxHeapify(heap,i)
+print (heap)
+练习：
+6.2-1：
+heap = [27,17,3,16,13,10,1,5,7,12,4,8,9,0]
+i = 2
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    l = i+1
+    r = i+2
+    largest = i
+    if l <= heapLenth-1 and heap[l] > heap[i]:
+        largest = l
+    if r <= heapLenth-1 and heap[r] > heap[largest]:
+        largest = r
+    if largest != i:
+        heap[i],heap[largest]=heap[largest],heap[i]
+        MaxHeapify(heap,largest)
+
+MaxHeapify(heap,i)
+print (heap)
+6.2-2:
+heap = [27,17,30,16,13,10,1,5,7,12,4,8,9,0]
+i = 2
+
+def MinHeapify(heap,i):
+    heapLenth = len(heap)
+    l = i+1
+    r = i+2
+    smallest = i
+    if l <= heapLenth-1 and heap[l] < heap[i]:
+        smallest = l
+    if r <= heapLenth-1 and heap[r] < heap[smallest]:
+        smallest = r
+    if smallest != i:
+        heap[i],heap[smallest]=heap[smallest],heap[i]
+        MinHeapify(heap,smallest)
+
+MinHeapify(heap,i)
+print (heap)
+6.2-3:代码只能将i向下调整，不能将其向上调节到根节点。
+6.2-4：i>A.heap-size/2时，A[i]是叶节点，不会有变化。
+6.2-5：
+heap = [27,17,3,16,13,10,1,5,7,12,4,8,9,0]
+i = 2
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    large = i
+    l = large+1
+    r = large+2
+    while heap[large] < heap[l] or heap[large] < heap[r]:
+        if heap[r] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+            large = l 
+        elif heap[l] <= heap[r]:
+            heap[large],heap[r]=heap[r],heap[large]
+            large = r
+        l = large+1
+        r = large+2
+        if l > heapLenth-1 or r > heapLenth-1:break
+            
+MaxHeapify(heap,i)
+print (heap)
+6.2-6:不会
+6.3 建堆
