@@ -244,5 +244,100 @@ print ( HeapSort(A))
 6.4-4：不会
 6.4-5：不会
 6.5 优先队列
+HeapExtractMax伪代码实现：
+A = [15,13,9,5,12,8,7,4,0,6,2,1]
 
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    large = i
+    l = 2*large+1
+    r = 2*large+2
+    if l > heapLenth-1:return 
+    if r > heapLenth-1:
+        if heap[large] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+        return
+    while heap[large] < heap[l] or heap[large] < heap[r]:
+        if heap[r] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+            large = l 
+        elif heap[l] <= heap[r]:
+            heap[large],heap[r]=heap[r],heap[large]
+            large = r
+        l = 2*large+1
+        r = 2*large+2
+        if l > heapLenth-1 or r > heapLenth-1:break
+
+def HeapExtractMax(heap):
+    if not heap:return "heap underflow"
+    heap[0],heap[-1] = heap[-1],heap[0]
+    res = heap.pop()
+    MaxHeapify(heap,0)
+    return res
+    
+print (HeapExtractMax(A))
+HeapIncreaseKey伪代码实现：
+def HeapIncreaseKey(heap,i,key):
+    if key < heap[i]:return "new key is smaller than current key"
+    heap[i] = key
+    parent = (i+1)//2 -1
+    while i > 0 and heap[parent] < heap[i]:
+        heap[parent],heap[i] = heap[i],heap[parent]
+        i = parent
+        parent = (i+1)//2 -1
+MaxHeapInsert伪代码实现：
+def MaxHeapInsert(heap,key):
+    heap.append(key)
+    HeapIncreaseKey(heap,len(heap)-1,key)
+练习：
+6.5-1:
+A = [15,13,9,5,12,8,7,4,0,6,2,1]
+
+def MaxHeapify(heap,i):
+    heapLenth = len(heap)
+    large = i
+    l = 2*large+1
+    r = 2*large+2
+    if l > heapLenth-1:return 
+    if r > heapLenth-1:
+        if heap[large] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+        return
+    while heap[large] < heap[l] or heap[large] < heap[r]:
+        if heap[r] < heap[l]:
+            heap[large],heap[l]=heap[l],heap[large]
+            large = l 
+        elif heap[l] <= heap[r]:
+            heap[large],heap[r]=heap[r],heap[large]
+            large = r
+        l = 2*large+1
+        r = 2*large+2
+        if l > heapLenth-1 or r > heapLenth-1:break
+
+def HeapExtractMax(heap):
+    if not heap:return "heap underflow"
+    heap[0],heap[-1] = heap[-1],heap[0]
+    res = heap.pop()
+    MaxHeapify(heap,0)
+    return res
+    
+print (HeapExtractMax(A))
+6.5-2:
+A = [15,13,9,5,12,8,7,4,0,6,2,1]
+
+def HeapIncreaseKey(heap,i,key):
+    if key < heap[i]:return "new key is smaller than current key"
+    heap[i] = key
+    parent = (i+1)//2 -1
+    while i > 0 and heap[parent] < heap[i]:
+        heap[parent],heap[i] = heap[i],heap[parent]
+        i = parent
+        parent = (i+1)//2 -1
+
+def MaxHeapInsert(heap,key):
+    heap.append(key)
+    HeapIncreaseKey(heap,len(heap)-1,key)
+        
+MaxHeapInsert(A,10)
+print (A)
 
