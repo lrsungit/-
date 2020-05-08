@@ -1,0 +1,19 @@
+9.1 最小值和最大值
+同时找到最小值和最大值伪代码实现：
+def MaxAndMin(A):
+    n = len(A)
+    if n%2 == 0:
+        A_max,A_min = max(A[0], A[1]),min(A[0], A[1])
+        for i in range(2,n,2):
+            A_max = max(A_max, max(A[i], A[i+1]))
+            A_min = min(A_min, min(A[i], A[i+1]))
+    else:
+        A_max,A_min = A[0],A[0]
+        for i in range(1,n,2):
+            A_max = max(A_max, max(A[i], A[i+1]))
+            A_min = min(A_min, min(A[i], A[i+1]))
+    return(A_max,A_min)
+练习：
+9.1-1:不会
+9.1-2:不会
+9.2 期望为线性时间的选择算法
