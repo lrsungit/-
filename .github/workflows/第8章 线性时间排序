@@ -97,3 +97,61 @@ for j in n_list:
 print(radixSort)
 8.3-5：不会
 8.4 桶排序
+桶排序伪代码实现：
+A = [0.79,0.13,0.16,0.64,0.39,0.2,0.89,0.53,0.71,0.42]
+def BucketSort(A):
+    n = len(A)
+    B = [[] for i in range(n)]
+    for a in A:
+        b = int(a*n)
+        B[b].append(a)
+    res = []
+    for b in B:
+        if b and len(b)>1:
+            b = InsertionSort(b)
+    for b in B:
+        if b:res.extend(b)    
+    return res
+
+def InsertionSort(a):
+    for j in range(1,len(a)):
+        key = a[j]
+        i = j-1
+        while i >= 0 and a[i] > key:
+            a[i+1] = a[i]
+            i -= 1
+        a[i+1] = key
+    return a
+print(BucketSort(A))
+练习：
+8.4-1：
+A = [0.79,0.13,0.16,0.64,0.39,0.2,0.89,0.53,0.71,0.42]
+def BucketSort(A):
+    n = len(A)
+    B = [[] for i in range(n)]
+    for a in A:
+        b = int(a*n)
+        B[b].append(a)
+    res = []
+    for b in B:
+        if b and len(b)>1:
+            b = InsertionSort(b)
+    for b in B:
+        if b:res.extend(b)    
+    return res
+
+def InsertionSort(a):
+    for j in range(1,len(a)):
+        key = a[j]
+        i = j-1
+        while i >= 0 and a[i] > key:
+            a[i+1] = a[i]
+            i -= 1
+        a[i+1] = key
+    return a
+print(BucketSort(A))
+8.4-2：不会
+8.4-3:E(X^2)=3/2 (E(X))^2=1
+8.4-4：不会
+8.4-5：不会
+思考题：不会
