@@ -48,3 +48,52 @@ def CountingSort(A):
     return B
 8.2-4：不会
 8.3 基数排序
+练习：
+8.3-1：不会
+8.3-2：不会
+8.3-3：不会
+8.3-4：
+A = [35, 48, 0, 8, 15, 80, 99, 3, 240, 168, 195, 224, 630, 120, 1413]
+n =15
+
+def NumToN_List(numlist,base):
+    res = []
+    for num in numlist:
+        quotient = num
+        remainder = 0
+        conver_stack = []
+        for i in range(3):
+            remainder = quotient % base
+            conver_stack.append(remainder)
+            quotient = quotient // base
+        res.append(conver_stack[:])
+    return res
+
+        
+def CountingSort(A,Alist):
+    k = max(A)+1
+    B = [0]*len(A)
+    C = [0]*k
+    for a in A:
+        C[a] += 1
+    for i in range(1,k):
+        C[i] += C[i-1]
+    for j in range(len(A)-1,-1,-1):
+        B[C[A[j]]-1] = Alist[j]
+        C[A[j]] -= 1
+    return B
+
+n_list = NumToN_List(A,n)
+for i in range(3):
+    n_list_i = [l[i] for l in n_list]
+    n_list = CountingSort(n_list_i,n_list)
+radixSort = []
+for j in n_list:
+    m = 0
+    for k in range(3):
+        m += j[k]*(n**k)
+    radixSort.append(m)
+        
+print(radixSort)
+8.3-5：不会
+8.4 桶排序
