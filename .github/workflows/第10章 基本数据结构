@@ -1,0 +1,99 @@
+10.1 栈和队列
+栈操作伪代码实现：
+def StackEmpty(s):
+    if len(s) == 0:
+        return True
+    else:
+        return False
+    
+def Push(s,x):
+    s.append(x)
+    
+def Pop(s):
+    if StackEmpty:
+        return "underflow"
+    else:
+        return s.pop()
+队列操作伪代码实现：
+def Enqueque(q,x):
+    q.append(x)
+
+def Dequeque(q):
+    res = q[0]
+    del q[0]
+    return res
+练习：
+10.1-1:过
+10.1-2:不会
+10.1-3:过
+10.1-4:
+def Enqueque(q,x):
+    q.insert(0,x)
+
+def Dequeque(q):
+    if not q:
+        return "underflow"
+    res = q[0]
+    del q[0]
+    return res
+10.1-5:
+def LeftInsert(q,x):
+    q.insert(0,x)
+
+def ReftInsert(q,x):
+    q.append(x)
+    
+def LeftPop(q):
+    if not q:
+        return "underflow"
+    res = q[0]
+    del q[0]
+    return res
+
+def RightPop(q):
+    return q.pop()
+10.1-6:
+s1 = []
+s2 = []
+def Enqueque(x):
+    s1.insert(0,x)
+
+def Dequeque():
+    if s2:
+        return s2.pop()
+    else:
+        if s1:
+            while s1:
+                s2.append(s1[0])
+                del s1[0]
+            return s2.pop()
+        else:
+            return "underflow"
+10.1-7:
+s1 = []
+s2 = []
+def Push(x):
+    if s2:
+        s2.append(x)
+    else:
+        s1.append(x)
+
+def Pop():
+    res = []
+    if s2:
+        if len(s2)==1:return s2.pop()
+        n = len(s2)-1
+        for i in range(n):
+            s1.append(s2[0])
+            del s2[0]
+        return s2.pop()
+    elif s1:
+        if len(s1)==1:return s1.pop()
+        n = len(s1)-1
+        for i in range(n):
+            s2.append(s1[0])
+            del s1[0]
+        return s1.pop()
+    else:
+        return "underflow"
+10.2 链表
