@@ -97,3 +97,189 @@ def Pop():
     else:
         return "underflow"
 10.2 链表
+链表伪代码实现：
+def ListSearch(L,k):
+    x = L.head
+    while x:
+        if x.key = k:return x
+        x = x.next
+
+def ListInsert(L,x):
+    x.next = L.head
+    if L.head:
+        L.head.prev =x
+    L.head = x
+    x.prev = None
+
+def ListDelete(L,x):
+    if x.prev:
+        x.prev.next = x.next
+    else:
+        L.head = x.next
+    if x.next:
+        x.next.prev = x.prev
+带有哨兵链表伪代码实现：
+def ListSearch(L,k):
+    x = L.none.next
+    while x:
+        if x.key = k:return x
+        x = x.next
+
+def ListInsert(L,x):
+    x.next = L.none.next
+    L.none.next.prev =x
+    L.none.next = x
+    x.prev = L.none
+
+def ListDelete(L,x):
+    x.prev.next = x.next
+    x.next.prev = x.prev
+双向循环列表带参数操作伪代码实现：
+class Node(object):
+    def __init__(self,key):
+        self.key = key
+        self.next = None
+        self.prev = None
+
+class SingleLinkList(object):
+    def __init__(self,node=None):
+        self.head = node
+        self.tail = self.head
+        self.size = 0
+        
+    def Insert(self,key,index=self.size):
+        if index > self.size:return "溢出"
+        node = Node(key)
+        if index == self.size:
+            node.prev = self.tail
+            self.tail.next = node
+            self.tail = node
+            node.next = self.head
+        elif index == 0:
+            node.next = self.head
+            self.head.prev = node
+            self.head = node
+            node.prev = self.tail
+        else:
+            currentNode = self.head
+            for i in range(index):
+                currentNode = currentNode.next
+            node.next = currentNode
+            node.prev = currentNode.prev
+            currentNode.prev.next = node
+            currentNode.prev = node
+        self.size +=1
+                
+    def Delete(self,index=self.size):
+        if index > self.size:return "溢出"
+        if index == self.size:
+            self.tail.prev.next = self.tail.next
+            self.tail.next.prev = self.tail.prev
+        elif index == 0:
+            self.head.prev.next = self.head.next
+            self.head.next.prev = self.head.prev
+        else:
+            currentNode = self.head
+            for i in range(index):
+                currentNode = currentNode.next
+            currentNode.prev.next = currentNode.next
+            currentNode.next.prev = currentNode.prev
+        self.size -=1
+    
+    def Search(self,key):
+        currentNode = self.head
+        while currentNode.key:
+            if currentNode.key = key:return currentNode
+            currentNode = currentNode.next
+练习：
+10.2-1：不会
+10.2-2:
+class Node(object):
+    def __init__(self,elem):
+        self.value = elem
+        self.next = None
+
+class SingleLinkList(object):
+    def __init__(self,node=None):
+        self.head = node
+        
+    def Push(self,x):
+        node = Node(x)
+        node.next = self.head
+        self.head = node
+        
+
+    def Pop(self):
+        res = self.head.value
+        self.head = self.head.next
+        return res
+10.2-3:
+class Node(object):
+    def __init__(self,elem):
+        self.value = elem
+        self.next = None
+
+class SingleLinkList(object):
+    def __init__(self,node=None):
+        self.head = node
+        self.tail = self.head
+        
+    def Enqueue(self,x):
+        node = Node(x)
+        self.tail.next = node
+        self.tail = node
+        
+    def Dequeue(self):
+        res = self.head.value
+        self.head = self.head.next
+        return res
+10.2-4:不会
+10.2-5：
+class Node(object):
+    def __init__(self,key):
+        self.key = key
+        self.next = None
+
+class SingleLinkList(object):
+    def __init__(self,node=None):
+        self.head = node
+        
+    def Insert(self,key):
+        node = Node(key)
+        if not self.head:
+            self.head = node
+            node.next = node            
+        else:
+            currentNode = self.head
+            while currentNode.next is not self.head:
+                currentNode = currentNode.next
+            currentNode.next = node
+            node.next = self.head
+                
+    def Delete(self):
+        if not self.head:
+            return 
+        else:
+            currentNode = self.head
+            while currentNode.next is not self.head:
+                previousNode = currentNode
+                currentNode = currentNode.next
+            previousNode.next = self.head
+    
+    def Search(self,key):
+        currentNode = self.head
+        while currentNode.next is not self.head:
+            if currentNode.key = key:return currentNode
+            currentNode = currentNode.next
+        return "没找到"
+10.2-6：不会
+10.2-7：
+def Reverse(self):
+        nextNode = self.head.next
+        self.head.next = None
+        while nextNode:
+            currentNode =nextNode
+            nextNode = nextNode.next
+            currentNode.next = self.head
+            self.head = currentNode
+10.3 指针和对象的实现        
