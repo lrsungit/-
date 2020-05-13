@@ -283,3 +283,88 @@ def Reverse(self):
             currentNode.next = self.head
             self.head = currentNode
 10.3 指针和对象的实现        
+分配与释放对象伪代码实现：
+def AllocateObject():
+    if not free:
+        return "out of space"
+    else:
+        x = free
+        free = x.next
+        return x
+
+def FreeObject(x):
+    x.next = free
+    free = x
+练习：
+10.3-1：不会
+10.3-2：不会
+10.3-3：不会
+10.3-4：不会
+10.3-5：不会
+10.4 有根树的表示
+练习：
+10.4-1：过
+10.4-2:
+class Node:
+    def __init__(self,value,left=None,right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+        
+def Pre(root):
+    if not root:return
+    print (root.value)
+    Pre(root.left)
+    Pre(root.right)
+
+def Mid(root):
+    if not root:return
+    Mid(root.left)
+    print (root.value)
+    Mid(root.right)
+    
+def back(root):
+    if not root:return
+    Mid(root.left)
+    Mid(root.right)
+    print (root.value)
+10.4-3:
+class Node:
+    def __init__(self,value,left=None,right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+def Pre(root):
+    stack = [root]
+    while stack:
+        r = stack.pop()
+        print r.value
+        if r.right:stack.append(r.right)
+        if r.left:stack.append(r.left)
+
+def Mid(root):
+    stack = []
+    r = root
+    while stack or r:
+        while r:
+            stack.append(r)
+            r = r.left
+        if stack:
+            r = stack.pop()
+            print r.value
+            r = r.right
+    
+def back(root):
+    stack = [root]
+    res = []
+    while stack:
+        r = stack.pop()
+        res.append(r)
+        if r.left:stack.append(r.left)
+        if r.right:stack.append(r.right)
+    while res:
+        print(res.pop().value)
+10.4-4：不会
+10.4-5：不会
+10.4-6：不会
+思考题：不会
