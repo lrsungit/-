@@ -53,3 +53,82 @@ for a in A:
 11.3-5：不会
 11.3-6：不会
 11.4 开放寻址法
+开放寻址法伪代码实现：
+def HashInsert(T,k):
+    m = len(T)
+    for i in range(m):
+        j = HashFunction(k,i)
+        if not T[j]:
+            T[j]=k
+            return j
+    return "hash table overflow"
+
+def HashSearch(T,k):
+    m = len(T)
+    for i in range(m):
+        j = HashFunction(k,i)
+        if T[j]==k:
+            return j
+        else:
+            break
+    return None
+练习：
+11.4-1：
+A=[10,22,31,4,15,28,17,88,59]
+m = 11
+T =[None]*m
+
+def HashFunction1(k,i):
+    res = (k+i)%m
+    return res
+
+def HashFunction2(k,i):
+    c1 = 1
+    c2 = 3
+    res = (k+c1*i+c2*i**2)%m
+    return res
+
+def HashFunction3(k,i):
+    h1 = k%m
+    h2 = 1+k%(m-1)
+    res = (h1+i*h2)%m
+    return res
+
+def HashInsert(T,k,HashFunction):
+    m = len(T)
+    for i in range(m):
+        j = HashFunction(k,i)
+        if not T[j]:
+            T[j]=k
+            return j
+    return "hash table overflow"
+
+for a in A:
+    HashInsert(T,a,HashFunction3)
+print (T)
+11.4-2:
+def HashDelete(T,k):
+     m = len(T)
+    for i in range(m):
+        j = HashFunction(k,i)
+        if T[j]==k:
+            T[j] = "DELETE"
+        else:
+            break
+    return None
+
+def HashInsert(T,k):
+    m = len(T)
+    for i in range(m):
+        j = HashFunction(k,i)
+        if not T[j] or T[j] == "DELETE":
+            T[j]=k
+            return j
+    return "hash table overflow"
+11.4-3:不会
+11.4-4:不会
+11.4-5:不会
+11.5 完全散列
+练习：
+11.5-1：不会
+思考题：不会
