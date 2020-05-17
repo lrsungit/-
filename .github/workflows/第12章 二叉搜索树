@@ -1,0 +1,11 @@
+12.1 什么是二叉搜索树
+中序遍历伪代码实现：
+def InorderTreeWalk(x):
+    if x:
+        InorderTreeWalk(x.left)
+        print x.key
+        InorderTreeWalk(x.right)
+练习：
+12.1-1：过
+12.1-2：最小堆是完全二叉树，并且每一个子节点都大于父节点。最小堆按序输出O（NlogN）。
+12.1-3：
