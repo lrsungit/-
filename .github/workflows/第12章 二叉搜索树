@@ -20,4 +20,18 @@ def Mid(root):
             r = stack.pop()
             print r.value
             r = r.right
-12.1-4
+12.1-4：
+def Pre(root):
+    if not root:return
+    print (root.value)
+    Pre(root.left)
+    Pre(root.right)
+    
+def back(root):
+    if not root:return
+    Mid(root.left)
+    Mid(root.right)
+    print (root.value)
+12.1-5:不会
+12.2 查询二叉搜索树
+
