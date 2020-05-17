@@ -9,3 +9,15 @@ def InorderTreeWalk(x):
 12.1-1：过
 12.1-2：最小堆是完全二叉树，并且每一个子节点都大于父节点。最小堆按序输出O（NlogN）。
 12.1-3：
+def Mid(root):
+    stack = []
+    r = root
+    while stack or r:
+        while r:
+            stack.append(r)
+            r = r.left
+        if stack:
+            r = stack.pop()
+            print r.value
+            r = r.right
+12.1-4
