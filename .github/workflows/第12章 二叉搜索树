@@ -100,3 +100,70 @@ def TreePredecessor(x):
 12.2-8:不会
 12.2-9:不会
 12.3 插入和删除
+伪代码实现：
+def TreeInsert(T,z):
+    y = None
+    x = T.root
+    while x:
+        y = x
+        if z.key < x.key:
+            x = x.left
+        else:
+            x = x.right
+    z.p = y
+    if not y:
+        T.root = z
+    elif z.key < y.key:
+        y.left = z
+    else:
+        y.right = z
+
+def Transplant(T,u,v):
+    if not u.p:
+        T.root = v
+    elif u == u.p.left:
+        u.p.left = v
+    else:
+        u.p.right = v
+    if v:
+        v.p = u.p
+
+def TreeDelete(T,z):
+    if not z.left:
+        Transplant(T,z,z.right)
+    elif not z.right:
+        Transplant(T,z,z.left)
+    else:
+        y = TreeMinimum(z.right)
+        if y.p != z:
+            Transplant(T,y,y.right)
+            y.right = z.right
+            y.right.p = y
+        Transplant(T,z,y)
+        y.left = z.left
+        y.left.p = y
+练习：
+12.3-1：
+def TreeInsert(x,z):
+    y = x.p
+    if x:
+        y = x
+        if z.key < x.key:
+            TreeInsert(x.left,z)
+            return
+        else:
+            TreeInsert(x.right,z)
+            return
+    z.p = y
+    if not y:
+        x.root = z
+    elif z.key < y.key:
+        y.left = z
+    else:
+        y.right = z
+12.3-2:不会
+12.3-3:不会
+12.3-4:不会
+12.3-5:不会
+12.3-6:不会
+12.4 随机构建二叉搜索树
