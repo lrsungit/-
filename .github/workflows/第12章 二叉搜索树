@@ -165,5 +165,40 @@ def TreeInsert(x,z):
 12.3-3:不会
 12.3-4:不会
 12.3-5:不会
-12.3-6:不会
+12.3-6:
+import random
+def TreeDelete(T,z):
+    pre = random.choice([True,False])
+    if pre:
+        TreeDelete_pre(T,z)
+    else:
+        TreeDelete_suc(T,z)
+def TreeDelete_pre(T,z):
+    if not z.left:
+        Transplant(T,z,z.right)
+    elif not z.right:
+        Transplant(T,z,z.left)
+    else:
+        y = TreeMaximum(z.left)
+        if y.p != z:
+            Transplant(T,y,y.left)
+            y.left = z.left
+            y.left.p = y
+        Transplant(T,z,y)
+        y.right = z.right
+        y.right.p = y
+def TreeDelete_suc(T,z):
+    if not z.left:
+        Transplant(T,z,z.right)
+    elif not z.right:
+        Transplant(T,z,z.left)
+    else:
+        y = TreeMinimum(z.right)
+        if y.p != z:
+            Transplant(T,y,y.right)
+            y.right = z.right
+            y.right.p = y
+        Transplant(T,z,y)
+        y.left = z.left
+        y.left.p = y
 12.4 随机构建二叉搜索树
