@@ -8,3 +8,39 @@
 13.1-6：不会
 13.1-7：不会
 13.2 旋转
+左旋伪代码实现：
+def LeftRotate(T,x):
+    y = x.right
+    x.right = y.left
+    if y.left:
+        y.left.p = x
+    y.p = x.p
+    if not x.p:
+        T.root = y
+    elif x == x.p.left:
+        x.p.left = y
+    else:
+        x.p.right = y
+    y.left = x
+    x.p = y
+练习：
+13.2-1：
+def RightRotate(T,x):
+    y = x.left
+    x.left = y.right
+    if y.right:
+        y.right.p = x
+    y.p = x.p
+    if not x.p:
+        T.root = y
+    elif x == x.p.left:
+        x.p.left = y
+    else:
+        x.p.right = y
+    y.right = x
+    x.p = y
+13.2-2：不会
+13.2-3：不会
+13.2-4：不会
+13.2-5：不会
+13.3 插入
