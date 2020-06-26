@@ -98,3 +98,19 @@ def RBInsertFixup(T,z):
                 LeftRotate(T,z.p.p)
     T.root.color = "BLACK"
 练习：
+13.3-1：为了保持性质5，令红黑树的黑高不变。
+13.3-2：不会
+13.3-3：不会
+13.3-4：不会
+13.3-5：不会
+13.3-6：不会
+13.4 删除
+def RB_Transplant(T,u,v):
+    if u.p == None:
+        T.root = v
+    elif u == u.p.left:
+        u.p.left = v
+    else:
+        u.p.right = v
+    v.p = u.p
+    
