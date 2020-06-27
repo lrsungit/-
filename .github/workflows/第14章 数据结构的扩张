@@ -1,0 +1,83 @@
+14.1 动态顺序统计
+查找具有给定秩的元素伪代码实现：
+def OS_Select(x,i):
+    r = x.left.size + 1
+    if i == r:
+        return x
+    elif i < r:
+        return OS_Select(x.left,i)
+    else:
+        return OS_Select(x.right,i-r)
+确定一个元素的秩伪代码实现：
+def OS_Rank(T,x):
+    r = x.left.size + 1
+    y = x
+    while y <> T.root:
+        if y == y.p.right:
+            r += y.p.left.size + 1
+        y = y.p
+    return r
+对子树规模的维护伪代码实现：
+def LeftRotate(T,x):
+    y = x.right
+    x.right = y.left
+    if y.left:
+        y.left.p = x
+    y.p = x.p
+    if not x.p:
+        T.root = y
+    elif x == x.p.left:
+        x.p.left = y
+    else:
+        x.p.right = y
+    y.left = x
+    x.p = y
+    y.size = x.size
+    x.size = x.left.size + x.right.size + 1
+    
+def RightRotate(T,x):
+    y = x.left
+    x.left = y.right
+    if y.right:
+        y.right.p = x
+    y.p = x.p
+    if not x.p:
+        T.root = y
+    elif x == x.p.left:
+        x.p.left = y
+    else:
+        x.p.right = y
+    y.right = x
+    x.p = y
+    y.size = x.size
+    x.size = x.left.size + x.right.size + 1
+练习：
+14.1-1：不会
+14.1-2：不会
+14.1-3：
+def OS_Select(x,i):
+    r = x.left.size + 1
+    while i <> r:
+        if i < r:
+            x = x.left
+        elif i > r:
+            x = x.right
+            i = i - r
+        r = x.left.size + 1
+    return x
+14.1-4：
+def OS_Rank(T,x):
+    r = x.left.size + 1
+    y = x
+    if y == T.root:return r
+    if y == y.p.right:
+        return r + OS_Rank(T,y.p)
+    else:
+        return OS_Rank(T,y.p)
+14.1-5:
+def OS_Successor(T,x,i):
+    r = OS_Rank(T,x) + i
+    return OS_Select(T,r)
+14.1-6:不会
+14.1-7：不会
+14.1-8：不会
